@@ -92,6 +92,7 @@ def BinomialGrafica(n):
 #------------------------------
 
 def graficoConvergencia():
+    Y=BinomialGrafica(1000)
     import matplotlib.pyplot as plt
     It=len(Y)+1
     x=list(range(1,It))
