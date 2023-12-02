@@ -125,6 +125,57 @@ def opg(n):
     return delta, u, d, p
 
 #------------------------------
+def grafico(arbol,n):
+    # Crea un grafo dirigido
+    G = nx.DiGraph()
+
+# Diccionario para rastrear nodos duplicados
+    nodo_counter = {}
+    label =[]
+# Agrega nodos
+    for i in range(n+1):
+        label.append([])
+        for j in range(len(arbol[i])):
+            valor_nodo = round(arbol[i][j], 2)
+
+        # Agrega un sufijo único para evitar duplicados
+            if valor_nodo in nodo_counter:
+               nodo_counter[valor_nodo] += 1
+               aux =nodo_counter[valor_nodo]*" "
+               nombre_nodo = f"{aux}{valor_nodo}{aux}"
+            else:
+               nodo_counter[valor_nodo] = 0
+               aux =nodo_counter[valor_nodo]*" "
+               nombre_nodo = f"{aux}{valor_nodo}{aux}"
+
+            G.add_node(nombre_nodo)
+            label[i].append(nombre_nodo)
+
+# Agrega arcos (conexiones entre nodos)
+    for i in range(n):
+        for j in range(len(arbol[i])):
+            nodo_actual = label[i][j]
+            nodo_siguiente_izquierda = label[i+1][j]
+            nodo_siguiente_derecha = label[i+1][j+1]
+
+            G.add_edge(nodo_actual, nodo_siguiente_izquierda)
+            G.add_edge(nodo_actual, nodo_siguiente_derecha)
+
+# Dibuja el grafo
+    pos = {}
+    for i in range(n+1):
+        paso = (2*i)/len(arbol[i])
+        for j in range(len(arbol[i])):
+            nombre_nodo = label[i][j]
+            pos[nombre_nodo] = (i, i - paso*j)
+
+# Define la disposición de los nodos
+
+    nx.draw(G, pos, with_labels=True, node_size=1000, node_color="lightblue", font_size=10, font_weight="bold")
+
+    plt.show()
+
+#------------------------------
 
 def Binomial(n):
     if n<11 or tipo==1:
