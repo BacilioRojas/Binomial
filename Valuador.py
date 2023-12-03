@@ -179,6 +179,7 @@ def grafico(arbol,n):
 #------------------------------
 
 def Binomial(n):
+    tipos ={-1:"Put",1:"Call"}
     if n<11 or tipo==1:
        prima,arbol,arbolOp =BinomialLenta(n)
        if n<11:
@@ -188,4 +189,4 @@ def Binomial(n):
        prima =BinomialRapida(n)
     else:
        prima=BinomialRp(n)
-    return prima
+    return f"el valor del {tipos[clase]} es {prima}"
