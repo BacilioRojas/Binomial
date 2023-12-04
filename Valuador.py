@@ -177,6 +177,10 @@ def grafico(arbol,n):
     plt.show()
 
 #------------------------------
+def paridad(prima):
+       return f'{prima+(K*np.exp(-r*T)-S)*clase}'
+
+#------------------------------
 
 def Binomial(n):
     tipos ={-1:"Put",1:"Call"}
@@ -189,4 +193,7 @@ def Binomial(n):
        prima =BinomialRapida(n)
     else:
        prima=BinomialRp(n)
-    return f"el valor del {tipos[clase]} es {prima}"
+    respuesta = f"El valor del {tipos[clase]} es {prima} \n"
+    if tipo==0:
+       respuesta +=f"El valor del {tipos[-clase]} es "+paridad(prima)
+    return respuesta
