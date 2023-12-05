@@ -10,6 +10,7 @@ r =0.05
 n = 10000
 clase = 1 #1 para call -1 para put
 tipo = 0 #1 Americana 0 Europea
+metodo = 0 #0 para binomial, 1 para Black and scholes
 #------------------------------
 
 def opergen(n):
@@ -49,6 +50,15 @@ def BS_PUT(S, K, T, r, sigma):
     d1 = (np.log(S/K) + (r + sigma**2/2)*T) / (sigma*np.sqrt(T))
     d2 = d1 - sigma* np.sqrt(T)
     return K*np.exp(-r*T)*N(-d2) - S*N(-d1)
+
+#------------------------------
+
+
+def BS():
+    if clase == -1:
+        return BS_PUT()
+    else:
+        return BS_CALL()
 
 #------------------------------
 
